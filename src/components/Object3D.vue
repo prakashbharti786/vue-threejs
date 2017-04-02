@@ -5,9 +5,11 @@
 <script>
 import { Object3D } from 'three'
 import { assign } from '../util'
+import Animation from './Animation'
 
 export default {
   name: 'Object3D',
+  mixins: [Animation],
 
   props: {
     obj: { type: Object3D },

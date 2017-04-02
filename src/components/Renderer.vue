@@ -6,15 +6,15 @@
 </template>
 
 <script>
-/* global requestAnimationFrame */
 /* eslint-disable no-duplicate-imports */
 import { WebGLRenderer } from 'three'
 import * as THREE from 'three'
-
 import bus from '../bus'
+import Animation from './Animation'
 
 export default {
   name: 'Renderer',
+  mixins: [Animation],
 
   props: {
     size: {
@@ -50,7 +50,6 @@ export default {
 
   mounted () {
     this.$refs.container.appendChild(this.curObj.domElement)
-    this.animate()
   },
 
   // It's good to clean up event listeners before
@@ -76,7 +75,6 @@ export default {
       this.camera = camera
     },
     animate () {
-      requestAnimationFrame(this.animate)
       this.curObj.render(this.scene, this.camera)
     }
   }
