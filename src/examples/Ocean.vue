@@ -1,22 +1,22 @@
+<template>
+  <animation :fn="animate">
+    <slot></slot>
+  </animation>
+</template>
+
 <script>
-/* global requestAnimationFrame */
 import * as THREE from 'three'
 import Object3D from '../components/Object3D'
+import Animation from '../components/Animation'
 
 // http://threejs.org/examples/#webgl_geometry_dynamic
 export default {
   name: 'Ocean',
-
   mixins: [Object3D],
+  components: { Animation },
 
   created () {
-    this.animate = this.animate.bind(this)
-    this.clock = new THREE.Clock()
     this._obj = this.createOcean()
-  },
-
-  mounted () {
-    this.animate()
   },
 
   methods: {
@@ -37,11 +37,10 @@ export default {
       return mesh
     },
 
-    animate () {
-      requestAnimationFrame(this.animate)
-      const time = this.clock.getElapsedTime() * 5
+    animate (dt) {
+      dt *= 5
       for (let i = 0, l = this._obj.geometry.vertices.length; i < l; i++) {
-        this._obj.geometry.vertices[i].y = 10 * Math.sin(i / 5 + (time + i) / 7)
+        this._obj.geometry.vertices[i].y = 10 * Math.sin(i / 5 + (dt + i) / 7)
       }
       this._obj.geometry.verticesNeedUpdate = true
     }

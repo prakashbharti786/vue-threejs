@@ -1,20 +1,23 @@
 <template>
   <div>
-    <slot></slot>
+    <animation :fn="animate">
+      <slot></slot>
+    </animation>
     <div ref="container"></div>
   </div>
 </template>
 
 <script>
-/* global requestAnimationFrame */
 /* eslint-disable no-duplicate-imports */
 import { WebGLRenderer } from 'three'
 import * as THREE from 'three'
 
 import bus from '../bus'
+import Animation from './Animation'
 
 export default {
   name: 'Renderer',
+  components: { Animation },
 
   props: {
     size: {
@@ -53,7 +56,6 @@ export default {
 
   mounted () {
     this.$refs.container.appendChild(this._obj.domElement)
-    this.animate()
   },
 
   // It's good to clean up event listeners before
@@ -79,7 +81,6 @@ export default {
       this.camera = camera
     },
     animate () {
-      requestAnimationFrame(this.animate)
       this._obj.render(this.scene, this.camera)
     }
   }
