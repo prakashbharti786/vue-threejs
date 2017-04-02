@@ -1,7 +1,8 @@
 <template>
-  <animation :fn="animate">
+  <div>
+    <animation :fn="animate"></animation>
     <slot></slot>
-  </animation>
+  </div>
 </template>
 
 <script>

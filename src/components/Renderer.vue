@@ -1,8 +1,7 @@
 <template>
   <div>
-    <animation :fn="animate">
-      <slot></slot>
-    </animation>
+    <animation :fn="animate"></animation>
+    <slot></slot>
     <div ref="container"></div>
   </div>
 </template>
@@ -81,7 +80,9 @@ export default {
       this.camera = camera
     },
     animate () {
-      this._obj.render(this.scene, this.camera)
+      if (this.scene && this.camera) {
+        this._obj.render(this.scene, this.camera)
+      }
     }
   }
 }
