@@ -3,29 +3,20 @@
 </style>
 
 <template>
-  <renderer :size="size">
+  <fullscreen-renderer>
     <scene>
       <camera :position="{ z: 15 }"></camera>
       <ocean :position="{ y: -200 }"></ocean>
     </scene>
-  </renderer>
+  </fullscreen-renderer>
 </template>
 
 <script>
-  import Ocean from './Ocean'
+import FullscreenRenderer from './FullscreenRenderer'
+import Ocean from './Ocean'
 
-  export default {
-    name: 'App',
-
-    components: { Ocean },
-
-    data () {
-      return {
-        size: {
-          w: window.innerWidth,
-          h: window.innerHeight
-        }
-      }
-    }
-  }
+export default {
+  name: 'App',
+  components: { Ocean, FullscreenRenderer }
+}
 </script>

@@ -30,6 +30,10 @@ export default {
     }
   },
 
+  watch: {
+    size: 'setSize'
+  },
+
   created () {
     this.animate = this.animate.bind(this)
     this.setScene = this.setScene.bind(this)
@@ -40,7 +44,7 @@ export default {
       this._obj = new WebGLRenderer({ antialias: true })
     }
     this._obj.name = this._obj.name || this._obj.type
-    this._obj.setSize(this.size.w, this.size.h)
+    this.setSize()
     this.$root.__rendererSize = this.size // fixme
 
     this._obj.setClearColor(0x000000)
@@ -65,6 +69,9 @@ export default {
   },
 
   methods: {
+    setSize () {
+      this._obj.setSize(this.size.w, this.size.h)
+    },
     setScene (scene) {
       this.scene = scene
 

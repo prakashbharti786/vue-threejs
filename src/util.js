@@ -10,3 +10,14 @@ export function assign (dest, ...srcs) {
     }
   })
 }
+
+export function throttle (fn, wait = 0) {
+  let lastCalledAt = -1
+  function throttledFn (...args) {
+    const now = Date.now()
+    if (now - lastCalledAt < wait) return
+    lastCalledAt = now
+    return fn.apply(this, args)
+  }
+  return throttledFn
+}
