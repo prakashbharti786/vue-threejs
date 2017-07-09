@@ -19,7 +19,7 @@ export default {
   props: {
     size: {
       type: Object, // { w, h }
-      required: true
+      default: () => ({ w: 0, h: 0 })
     },
     obj: { type: WebGLRenderer }
   },
@@ -37,10 +37,10 @@ export default {
       this.curObj = new WebGLRenderer({ antialias: true })
     }
     this.curObj.name = this.curObj.name || this.curObj.type
-    this.curObj.setSize(this.size.w, this.size.h)
+    if (this.size) this.curObj.setSize(this.size.w, this.size.h)
 
     // fixme: better solution for global vars
-    this.$root.__rendererSize = this.size
+    if (this.size) this.$root.__rendererSize = this.size
     this.$root.__rendererDom = this.curObj.domElement
     this.curObj.setClearColor(0x000000)
     this.scene = null

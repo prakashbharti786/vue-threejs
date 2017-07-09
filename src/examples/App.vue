@@ -3,7 +3,7 @@
 </style>
 
 <template>
-  <renderer :size="size">
+  <window-renderer>
     <scene>
       <orbit-controls :position="{ x: 9, y: 21, z: 20 }"
           :rotation="{ x: 2, y: 0, z: 3 }">
@@ -16,10 +16,11 @@
       <sf03 :position="{ y: 10 }"></sf03>
       <positional-audio :position="{ y: 10 }" url="static/Project_Utopia.ogg"></positional-audio>
     </scene>
-  </renderer>
+  </window-renderer>
 </template>
 
 <script>
+import WindowRenderer from '../components/WindowRenderer'
 import PositionalAudio from '../components/PositionalAudio'
 import OrbitControls from '../components/OrbitControls'
 import Ocean from './Ocean'
@@ -28,6 +29,7 @@ import SF03 from './SF03'
 export default {
   name: 'App',
   components: {
+    WindowRenderer,
     PositionalAudio,
     OrbitControls,
     Ocean,
